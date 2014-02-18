@@ -1,8 +1,10 @@
 
 $(document).on("pagebeforecreate", "#sl-lists-overview", function() {
     slUiGenerator.generateListElementGroup("#sl-lists-overview-list", slPersistance.getShoppingLists());
-    $('#sl-lists-overview-list li').on("click", function() {
-        var content = this.innerText;
+    $('#sl-lists-overview-list li a').on("click", function(event) {
+        event.preventDefault();
+        var content = this.text;
+        console.log(content+" klicked");
         slBusiness.showDetailPage(content);
     });
 });

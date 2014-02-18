@@ -7,10 +7,10 @@ slBusiness.showDetailPage = function(listname) {
 
 slBusiness.initListItems = function(){
     $("#sl-view-list li").attr("data-icon", "check");
-    $("#sl-view-list li").on("click", function(event) {
+    $("#sl-view-list li a").on("click", function(event) {
         event.preventDefault();
-        var itemName = this.innerText.trim();
-        var listName = $("#sl-view-header h3")[0].innerText;
+        var itemName = this.text.trim();
+        var listName = slPersistance.getLastChoice();
         var newList = slPersistance.removeItem(listName, itemName);
         $("#sl-view-list").html("");
         slUiGenerator.generateListElementGroup("#sl-view-list", newList);
@@ -34,7 +34,7 @@ slBusiness.initEditToolbar = function(
     });
 
     $(saveBtnSelector).on("click", function() {
-        var listitems = $(listSelector+" li");
+        var listitems = $(listSelector+" li a");
         var listname = $(listnameSelector).val().trim();
         if(listname === ""){
             listname = $(listnameSelector).html().trim();
@@ -42,7 +42,7 @@ slBusiness.initEditToolbar = function(
         var list = [];
 
         for (var idx = 0; idx < listitems.length; idx++) {
-            list[idx] = listitems[idx].innerText;
+            list[idx] = listitems[idx].text;
         }
         slPersistance.addList(listname, list);
         $.mobile.changePage("index.html");

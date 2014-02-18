@@ -6,7 +6,7 @@
 var slUiGenerator = {};
 
 slUiGenerator.generateListElement = function(destinationSelector, itemContent, doRefresh) {
-    var item = '<li>' + itemContent + '</li>';
+    var item = '<li><a>' + itemContent + '</a></li>';
     $(destinationSelector).append(item);
     if (doRefresh) {
         $(destinationSelector).listview('refresh');
